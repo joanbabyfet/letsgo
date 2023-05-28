@@ -9,6 +9,7 @@ import (
 
 	"github.com/joanbabyfet/letsgo/config"
 	"github.com/joanbabyfet/letsgo/global"
+	"github.com/joanbabyfet/letsgo/model"
 	"github.com/joanbabyfet/letsgo/router"
 
 	"github.com/gin-gonic/gin"
@@ -33,10 +34,14 @@ func main() {
 	config.InitConfig()
 	//创建数据库连接
 	global.InitDb()
+
+	//生成table
+	global.DB.Debug().AutoMigrate(&model.Example{})
+
 	//defer关键字，当api访问结束时，关闭数据库连接
 	defer global.DB.Close()
 
-	//监听8000端口
+	//监听8080端口
 	gin.SetMode(viper.GetString("server.run_mode"))
 	r.Run(viper.GetString("server.addr"))
 }

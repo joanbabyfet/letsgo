@@ -16,7 +16,8 @@ func Ip(c *gin.Context) {
 
 // ping检测用,可查看是否返回信息及时间戳
 func Ping(c *gin.Context) {
-	common.Success(c, nil, "")
+	//common.Success(c, nil, "")
+	c.String(200, "pong")
 }
 
 // 获取图形验证码

@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/joanbabyfet/letsgo/controller"
+	"github.com/joanbabyfet/letsgo/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,25 +14,31 @@ func InitRouter() *gin.Engine {
 	r.Static("/uploads", "./uploads") //设置文件上传目录, 让它可外部访问到
 	r.LoadHTMLGlob("template/*")      //模板目录
 
-	r.POST("/login", controller.Login)
-	r.POST("/upload", controller.Upload)
-	r.GET("/get_captcha", controller.Captcha)
-	r.GET("/reload_captcha", controller.ReloadCaptcha)
 	r.GET("/ping", controller.Ping)
 	r.GET("/ip", controller.Ip)
-	r.GET("/example", controller.ExampleIndex)
-	r.GET("/example/detail", controller.ExampleDetail)
-	r.POST("/example/add", controller.AddExample)
-	r.POST("/example/edit", controller.EditExample)
-	r.POST("/example/delete", controller.DeleteExample)
-	r.POST("/example/enable", controller.EnableExample)
-	r.POST("/example/disable", controller.DisableExample)
-	r.GET("/example_redis", controller.ExampleRedisIndex)
-	r.GET("/example_redis/detail", controller.ExampleRedisDetail)
-	r.POST("/example_redis/add", controller.AddExampleRedis)
-	r.POST("/example_redis/edit", controller.EditExampleRedis)
-	r.POST("/example_redis/delete", controller.DeleteExampleRedis)
-	r.POST("/example_redis/enable", controller.EnableExampleRedis)
-	r.POST("/example_redis/disable", controller.DisableExampleRedis)
+	r.POST("/login", controller.Login)
+	r.GET("/get_captcha", controller.Captcha)
+	r.GET("/reload_captcha", controller.ReloadCaptcha)
+
+	// 注册中间件
+	authorized := r.Group("/")
+	authorized.Use(middleware.JwtAuth())
+	{
+		r.POST("/upload", controller.Upload)
+		authorized.GET("/example", controller.ExampleIndex)
+		authorized.GET("/example/detail", controller.ExampleDetail)
+		authorized.POST("/example/add", controller.AddExample)
+		authorized.POST("/example/edit", controller.EditExample)
+		authorized.POST("/example/delete", controller.DeleteExample)
+		authorized.POST("/example/enable", controller.EnableExample)
+		authorized.POST("/example/disable", controller.DisableExample)
+		authorized.GET("/example_redis", controller.ExampleRedisIndex)
+		authorized.GET("/example_redis/detail", controller.ExampleRedisDetail)
+		authorized.POST("/example_redis/add", controller.AddExampleRedis)
+		authorized.POST("/example_redis/edit", controller.EditExampleRedis)
+		authorized.POST("/example_redis/delete", controller.DeleteExampleRedis)
+		authorized.POST("/example_redis/enable", controller.EnableExampleRedis)
+		authorized.POST("/example_redis/disable", controller.DisableExampleRedis)
+	}
 	return r
 }
