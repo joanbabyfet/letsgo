@@ -1,0 +1,38 @@
+app:
+  file_link: http://localhost:8080/uploads
+server:
+  run_mode: debug
+  addr: :8080
+db:
+  driver_name: mysql
+  host: 192.168.56.107
+  port: 3306
+  database: 
+  prefix: 
+  username: 
+  password: 
+  charset: utf8
+redis:
+  host: 192.168.56.107
+  port: 6379
+  password: 
+  db: 1
+  pool_size: 5
+mongo:
+  host: 192.168.56.107
+  port: 27017
+  database: 
+  username: 
+  password: 
+mail:
+  host: smtp.mailgun.org
+  port: 587
+  username: 
+  password: 
+  encryption: tls
+  from_address: 
+  from_name: 平台
+telegram_bot:
+  token: 
+line_bot:
+  token: 
