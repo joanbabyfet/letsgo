@@ -7,10 +7,10 @@ db:
   driver_name: mysql
   host: 192.168.56.107
   port: 3306
-  database: kakaphp
-  prefix: kk_
-  username: root
-  password: admin888
+  database: 
+  prefix: 
+  username: 
+  password: 
   charset: utf8
 redis:
   host: 192.168.56.107
@@ -21,18 +21,18 @@ redis:
 mongo:
   host: 192.168.56.107
   port: 27017
-  database: kakaphp
-  username: admin
-  password: admin888
+  database: 
+  username: 
+  password: 
 mail:
   host: smtp.mailgun.org
   port: 587
-  username: postmaster@sandbox1be15f57906341ad92f85726a17f63b1.mailgun.org
-  password: 55a88ea9fb8efa2976ae0377870ba45d
+  username: 
+  password: 
   encryption: tls
-  from_address: postmaster@sandbox1be15f57906341ad92f85726a17f63b1.mailgun.org
+  from_address: 
   from_name: 平台
 telegram_bot:
-  token: 5612442673:AAEVZ-dlh8f9YhfWKehw0t_E9b04ZWVYdxc
+  token: 
 line_bot:
-  token: B31YiKrefxXQxPSstYWyQFSVyImFPzcwAjUCrlti6wX
+  token: 

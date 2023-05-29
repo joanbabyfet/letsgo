@@ -14,13 +14,16 @@ func InitRouter() *gin.Engine {
 	r.Static("/uploads", "./uploads") //设置文件上传目录, 让它可外部访问到
 	r.LoadHTMLGlob("template/*")      //模板目录
 
+	//跨域中间件
+	r.Use(middleware.Cors())
+
 	r.GET("/ping", controller.Ping)
 	r.GET("/ip", controller.Ip)
 	r.POST("/login", controller.Login)
 	r.GET("/get_captcha", controller.Captcha)
 	r.GET("/reload_captcha", controller.ReloadCaptcha)
 
-	// 注册中间件
+	// 使用jwt中间件
 	authorized := r.Group("/")
 	authorized.Use(middleware.JwtAuth())
 	{
